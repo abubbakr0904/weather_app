@@ -16,6 +16,7 @@ dependencies:
   http: ^1.2.0
   intl: ^0.19.0
   flutter_screenutil: ^5.9.0
+  adaptive_theme: ^3.6.0
 
 dev_dependencies:
   flutter_test:

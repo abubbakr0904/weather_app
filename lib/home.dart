@@ -1,14 +1,13 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/data/models/simple_model/data_model.dart';
 import 'package:weather_app/data/modelss/one_call/one_call_models/one_call_data_models.dart';
 import 'package:weather_app/data/modelss/simple/weather_model/weather_model.dart';
 import 'package:weather_app/days7.dart';
 import 'package:weather_app/utils/extentions/extention.dart';
 import 'package:weather_app/utils/images/images.dart';
 
-import 'data/models/onecall_model/one_data.dart';
 import 'data/repository/repositorty.dart';
 import 'data/response.dart';
 
@@ -21,7 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final WeatherRepository weatherRepository = WeatherRepository();
-
+  bool isDark = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,12 +43,7 @@ class _HomeState extends State<Home> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            gradient: RadialGradient(
-                              colors: [
-                                Colors.yellow,
-                                Colors.amber,
-                              ],
-                            ),
+                            color: Theme.of(context).cardColor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.r))),
                         margin:
@@ -57,6 +51,23 @@ class _HomeState extends State<Home> {
                         padding: EdgeInsets.all(10.w),
                         child: Column(
                           children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Switch(
+                                  value: isDark,
+                                  onChanged: (v) async {
+                                    if (v) {
+                                      AdaptiveTheme.of(context).setDark();
+                                    } else {
+                                      AdaptiveTheme.of(context).setLight();
+                                    }
+                                    isDark = v;
+                                  },
+                                ),
+                                SizedBox(width: 10.w,)
+                              ],
+                            ),
                             Container(
                               child: Row(
                                 mainAxisAlignment:
@@ -67,11 +78,9 @@ class _HomeState extends State<Home> {
                                   ),
                                   Text(
                                     weatherMainModel.name,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: AppImages.fontName,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 32.sp),
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                      fontSize: 20.sp,
+                                    )
                                   ),
                                   SizedBox(
                                     width: 20.w,
@@ -89,14 +98,12 @@ class _HomeState extends State<Home> {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15.r),
                                   ),
-                                  color: Colors.white.withOpacity(0.5)),
+                                  color: Theme.of(context).cardColor),
                               child: Text(
                                 weatherMainModel.dt.getParsedDate().toString(),
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: AppImages.fontName,
-                                    fontSize: 10.sp),
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  fontSize: 10.sp
+                                ),
                               ),
                             ),
                             Container(
@@ -142,11 +149,9 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       "Precipitation: 21%",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Poppins"),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                        fontSize: 13.sp
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -161,11 +166,9 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       "Humidity: ${weatherMainModel.mainModel.humidity}",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Poppins"),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                        fontSize: 13.sp
+                                      )
                                     ),
                                   ],
                                 )
@@ -189,11 +192,9 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       "Wind: 10 km/h",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 10.sp,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Poppins"),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                        fontSize: 10.sp
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -208,11 +209,9 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       "Sunset: 29%",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 10.sp,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Poppins"),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                        fontSize: 10.sp
+                                      ),
                                     ),
                                   ],
                                 )
@@ -253,7 +252,7 @@ class _HomeState extends State<Home> {
                                 (index) => Text(
                                   " -",
                                   style: TextStyle(
-                                      color: Colors.yellow,
+                                      color: Theme.of(context).cardColor,
                                       fontSize: 20.sp,
                                       fontWeight: FontWeight.w300),
                                 ),
@@ -278,7 +277,7 @@ class _HomeState extends State<Home> {
                                 margin: EdgeInsets.symmetric(horizontal: 5.w),
                                 padding: EdgeInsets.all(10.w),
                                 decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.2),
+                                    color: Theme.of(context).cardColor.withOpacity(0.2),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(30))),
                                 child: Column(
@@ -287,11 +286,9 @@ class _HomeState extends State<Home> {
                                       oneCallData.hourlyModels[index].dt
                                           .toInt()
                                           .getParsedHour(),
-                                      style: TextStyle(
-                                          fontFamily: AppImages.fontName,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15.sp,
-                                          color: Colors.white),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                        fontSize: 15.sp
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 5.h,
@@ -300,7 +297,6 @@ class _HomeState extends State<Home> {
                                         oneCallData.hourlyModels[index]
                                             .inWeather[0].icon
                                             .getWeatherIconUrl(),
-                                        color: Colors.white,
                                         width: 70.w,
                                         fit: BoxFit.cover),
                                     SizedBox(
@@ -309,11 +305,9 @@ class _HomeState extends State<Home> {
                                     Text(
                                       oneCallData.hourlyModels[index].temp
                                           .toString(),
-                                      style: TextStyle(
-                                          fontFamily: AppImages.fontName,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15.sp,
-                                          color: Colors.white),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                        fontSize: 15.sp
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -331,15 +325,13 @@ class _HomeState extends State<Home> {
                             style: TextButton.styleFrom(
                                 backgroundColor: Colors.amber),
                             onPressed: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Days7()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const Days7()));
                             },
                             child: Text(
                               "7 days report",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: AppImages.fontName,
-                                fontSize: 15.sp,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                fontSize: 15.sp
+                              )
                             )),
                       ),
                       ...List.generate(
@@ -348,7 +340,7 @@ class _HomeState extends State<Home> {
                               decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.r)),
-                                  color: Colors.white.withOpacity(0.5)),
+                                  color: Theme.of(context).cardColor.withOpacity(0.5)),
                               margin: EdgeInsets.symmetric(
                                   horizontal: 20.w, vertical: 5.h),
                               padding: EdgeInsets.all(10.w),
@@ -360,11 +352,9 @@ class _HomeState extends State<Home> {
                                     oneCallData.dailyModels[index].dt
                                         .toInt()
                                         .getParsedDateDay(),
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: AppImages.fontName,
-                                      fontSize: 20.sp,
-                                    ),
+                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      fontSize: 20.sp
+                                    )
                                   ),
                                   Image.network(oneCallData
                                       .dailyModels[index].inWeatherModel[0].icon
@@ -385,7 +375,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     );
   }
 }

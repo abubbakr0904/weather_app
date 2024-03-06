@@ -3,14 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/utils/extentions/extention.dart';
 import 'package:weather_app/utils/images/images.dart';
-import 'data/models/simple_model/data_model.dart';
 import 'data/modelss/one_call/one_call_models/one_call_data_models.dart';
 import 'data/repository/repositorty.dart';
 import 'data/response.dart';
 
 class Days7 extends StatefulWidget {
   const Days7({super.key});
-
   @override
   State<Days7> createState() => _Days7State();
 }
@@ -41,14 +39,14 @@ class _Days7State extends State<Days7> {
                   Padding(
                     padding: EdgeInsets.only(
                       top: 20.h,
-                      left: 20.w
+                      left: 20.w,
+                      bottom: 20.h,
                     ),
                     child: Text(
                       "Days",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: AppImages.fontName,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontSize: 35.sp,
+                        fontWeight: FontWeight.w700
                       ),
                     ),
                   ),
@@ -63,13 +61,8 @@ class _Days7State extends State<Days7> {
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20.r)
                               ),
-                              gradient: const LinearGradient(
-                                colors: [
-                                  Colors.yellow,
-                                  Colors.orange
-                                ]
-                              )
-                            ),
+                              color : Theme.of(context).cardColor
+                              ),
                             child : Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -177,7 +170,7 @@ class _Days7State extends State<Days7> {
           );
         },
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     );
   }
 }
