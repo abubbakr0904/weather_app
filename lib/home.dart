@@ -21,6 +21,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final WeatherRepository weatherRepository = WeatherRepository();
   bool isDark = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,23 +52,6 @@ class _HomeState extends State<Home> {
                         padding: EdgeInsets.all(10.w),
                         child: Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Switch(
-                                  value: isDark,
-                                  onChanged: (v) async {
-                                    if (v) {
-                                      AdaptiveTheme.of(context).setDark();
-                                    } else {
-                                      AdaptiveTheme.of(context).setLight();
-                                    }
-                                    isDark = v;
-                                  },
-                                ),
-                                SizedBox(width: 10.w,)
-                              ],
-                            ),
                             Container(
                               child: Row(
                                 mainAxisAlignment:
@@ -76,12 +60,13 @@ class _HomeState extends State<Home> {
                                   SvgPicture.asset(
                                     AppImages.back,
                                   ),
-                                  Text(
-                                    weatherMainModel.name,
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      fontSize: 20.sp,
-                                    )
-                                  ),
+                                  Text(weatherMainModel.name,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                            fontSize: 20.sp,
+                                          )),
                                   SizedBox(
                                     width: 20.w,
                                   ),
@@ -101,9 +86,10 @@ class _HomeState extends State<Home> {
                                   color: Theme.of(context).cardColor),
                               child: Text(
                                 weatherMainModel.dt.getParsedDate().toString(),
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: 10.sp
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(fontSize: 10.sp),
                               ),
                             ),
                             Container(
@@ -149,9 +135,10 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       "Precipitation: 21%",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        fontSize: 13.sp
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(fontSize: 13.sp),
                                     ),
                                   ],
                                 ),
@@ -165,11 +152,11 @@ class _HomeState extends State<Home> {
                                       width: 10.w,
                                     ),
                                     Text(
-                                      "Humidity: ${weatherMainModel.mainModel.humidity}",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        fontSize: 13.sp
-                                      )
-                                    ),
+                                        "Humidity: ${weatherMainModel.mainModel.humidity}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(fontSize: 13.sp)),
                                   ],
                                 )
                               ],
@@ -192,9 +179,10 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       "Wind: 10 km/h",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        fontSize: 10.sp
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(fontSize: 10.sp),
                                     ),
                                   ],
                                 ),
@@ -209,9 +197,10 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       "Sunset: 29%",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        fontSize: 10.sp
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(fontSize: 10.sp),
                                     ),
                                   ],
                                 )
@@ -277,7 +266,9 @@ class _HomeState extends State<Home> {
                                 margin: EdgeInsets.symmetric(horizontal: 5.w),
                                 padding: EdgeInsets.all(10.w),
                                 decoration: BoxDecoration(
-                                    color: Theme.of(context).cardColor.withOpacity(0.2),
+                                    color: Theme.of(context)
+                                        .cardColor
+                                        .withOpacity(0.2),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(30))),
                                 child: Column(
@@ -286,9 +277,10 @@ class _HomeState extends State<Home> {
                                       oneCallData.hourlyModels[index].dt
                                           .toInt()
                                           .getParsedHour(),
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        fontSize: 15.sp
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(fontSize: 15.sp),
                                     ),
                                     SizedBox(
                                       height: 5.h,
@@ -305,9 +297,10 @@ class _HomeState extends State<Home> {
                                     Text(
                                       oneCallData.hourlyModels[index].temp
                                           .toString(),
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        fontSize: 15.sp
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(fontSize: 15.sp),
                                     ),
                                   ],
                                 ),
@@ -320,19 +313,38 @@ class _HomeState extends State<Home> {
                         height: 10.h,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 20.w),
-                        child: TextButton(
-                            style: TextButton.styleFrom(
-                                backgroundColor: Colors.amber),
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const Days7()));
-                            },
-                            child: Text(
-                              "7 days report",
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontSize: 15.sp
-                              )
-                            )),
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                  backgroundColor: Colors.amber),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Days7()));
+                              },
+                              child: Text("7 days report",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(fontSize: 15.sp)),
+                            ),
+                            Switch(
+                              value: isDark,
+                              onChanged: (v) async {
+                                if (v) {
+                                  AdaptiveTheme.of(context).setDark();
+                                } else {
+                                  AdaptiveTheme.of(context).setLight();
+                                }
+                                isDark = v;
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                       ...List.generate(
                           oneCallData.dailyModels.length,
@@ -340,7 +352,9 @@ class _HomeState extends State<Home> {
                               decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.r)),
-                                  color: Theme.of(context).cardColor.withOpacity(0.5)),
+                                  color: Theme.of(context)
+                                      .cardColor
+                                      .withOpacity(0.5)),
                               margin: EdgeInsets.symmetric(
                                   horizontal: 20.w, vertical: 5.h),
                               padding: EdgeInsets.all(10.w),
@@ -349,17 +363,18 @@ class _HomeState extends State<Home> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    oneCallData.dailyModels[index].dt
-                                        .toInt()
-                                        .getParsedDateDay(),
-                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                      fontSize: 20.sp
-                                    )
-                                  ),
-                                  Image.network(oneCallData
-                                      .dailyModels[index].inWeatherModel[0].icon
-                                      .getWeatherIconUrl(),
-                                      height: 50.h,
+                                      oneCallData.dailyModels[index].dt
+                                          .toInt()
+                                          .getParsedDateDay(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(fontSize: 20.sp)),
+                                  Image.network(
+                                    oneCallData.dailyModels[index]
+                                        .inWeatherModel[0].icon
+                                        .getWeatherIconUrl(),
+                                    height: 50.h,
                                     fit: BoxFit.cover,
                                   ),
                                 ],

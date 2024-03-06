@@ -110,7 +110,7 @@ class AppTheme {
         style: IconButton.styleFrom(backgroundColor: Colors.black)),
     switchTheme: SwitchThemeData(
       thumbColor: MaterialStateProperty.all((Colors.black)),
-      trackOutlineColor: MaterialStateProperty.all((Colors.red)),
+      trackOutlineColor: MaterialStateProperty.all((Colors.white)),
     ),
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
